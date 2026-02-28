@@ -1,0 +1,10 @@
+title: Robo Skyline
+description: Software solutions engineered for impact.
+url: "https://arthurfaisman.github.io"
+baseurl: "/Robo-Skyline"
+
+markdown: kramdown
+permalink: pretty
+
+plugins:
+  - jekyll-seo-tag
