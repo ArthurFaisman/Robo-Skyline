@@ -87,11 +87,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .wordmark {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.06em;
@@ -101,12 +98,6 @@ h1, h2, h3, h4, h5, h6 {
 .wordmark:hover {
   color: #ffffff;
   opacity: 0.9;
-}
-
-.logo-img {
-  height: 44px;
-  width: auto;
-  border-radius: 4px;
 }
 
 .site-nav {
@@ -239,10 +230,20 @@ h1, h2, h3, h4, h5, h6 {
   margin: var(--space-md) auto 0;
 }
 
-.hero-logo {
-  width: 220px;
-  height: auto;
+.hero-logo-wrap {
+  width: min(360px, 100%);
   margin: 0 auto var(--space-md);
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(13, 13, 18, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(13, 13, 18, 0.1);
+}
+
+.hero-logo {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
   border-radius: 8px;
 }
 
@@ -394,18 +395,6 @@ h1, h2, h3, h4, h5, h6 {
   gap: var(--space-sm);
 }
 
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.footer-logo {
-  height: 36px;
-  width: auto;
-  border-radius: 3px;
-}
-
 .footer-contact a {
   color: var(--color-dark-text);
   transition: color 0.2s ease;
@@ -432,10 +421,6 @@ h1, h2, h3, h4, h5, h6 {
   .footer-inner {
     flex-direction: column;
     text-align: center;
-  }
-
-  .footer-brand {
-    flex-direction: column;
   }
 }
 

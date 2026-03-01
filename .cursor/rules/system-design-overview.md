@@ -44,15 +44,15 @@ Robo-Skyline/
 │   └── workflows/
 │       └── pages.yml              # GitHub Actions: build + deploy to Pages
 ├── _includes/
-│   ├── header.html                # Sticky nav bar with logo image, CSS-only mobile hamburger
-│   └── footer.html                # Logo, contact email, copyright, privacy link
+│   ├── header.html                # Sticky nav bar with text wordmark, CSS-only mobile hamburger
+│   └── footer.html                # Contact email, copyright, privacy link
 ├── _layouts/
 │   └── default.html               # Single HTML5 layout shell (head, seo, fonts, favicon, header, main, footer)
 ├── assets/
 │   ├── css/
 │   │   └── style.css              # All styling (~500 lines, CSS custom properties, responsive)
 │   └── images/
-│       └── logo.png               # Robo Skyline logo (used in header, hero, footer, favicon)
+│       └── logo.png               # Robo Skyline logo (used in hero and favicon)
 ├── _config.yml                    # Jekyll config (url, baseurl, plugins)
 ├── Gemfile                        # Jekyll ~> 4.3, jekyll-seo-tag
 ├── Gemfile.lock                   # Locked dependency versions
@@ -141,14 +141,13 @@ Key classes used across pages (defined in `assets/css/style.css`):
 
 - `.container` -- max-width wrapper with horizontal padding
 - `.site-header` / `.header-inner` -- sticky top navigation bar with red bottom border
-- `.wordmark` -- logo image + company name link in the header (flex layout)
-- `.logo-img` -- logo image in the header (44px height)
+- `.wordmark` -- text-only company name link in the header
 - `.site-nav` -- horizontal nav link list with red underline hover effect (collapses on mobile)
 - `.nav-toggle` / `.nav-toggle-label` -- CSS-only hamburger menu
 - `.hero` -- full-width hero section with centered logo and text, red accent bar via `::after`
-- `.hero-logo` -- large centered logo in hero section (220px width)
+- `.hero-logo-wrap` -- framed logo container for cleaner hero presentation
+- `.hero-logo` -- centered logo inside the hero frame
 - `.services` / `.services-grid` / `.service-card` -- services section with CSS Grid cards; cards have 4px red left border and hover lift effect
 - `.contact` / `.btn` -- contact CTA section with red styled button (uppercase, Rajdhani font)
 - `.site-footer` / `.footer-inner` -- dark footer with red top border and flex layout
-- `.footer-brand` / `.footer-logo` -- logo + copyright grouping in footer (36px logo)
 - `.page-content` -- wrapper for non-homepage content (privacy policy); h2 elements use red bottom border
