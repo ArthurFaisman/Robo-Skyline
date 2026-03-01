@@ -1,3 +1,16 @@
+---
+description: Update the system design overview doc after structural changes to layouts, styles, config, includes, or assets
+globs:
+  - _config.yml
+  - _layouts/**
+  - _includes/**
+  - assets/**
+  - index.html
+  - .github/workflows/**
+  - CNAME
+  - Gemfile
+---
+
 # Rule: Keep System Design Overview Current
 
 After making structural changes to this repository, update `.cursor/rules/system-design-overview.md` to reflect the new state. Structural changes include:

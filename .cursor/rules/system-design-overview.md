@@ -44,18 +44,20 @@ Robo-Skyline/
 │   └── workflows/
 │       └── pages.yml              # GitHub Actions: build + deploy to Pages
 ├── _includes/
-│   ├── header.html                # Sticky nav bar, CSS-only mobile hamburger
-│   └── footer.html                # Contact email, copyright, privacy link
+│   ├── header.html                # Sticky nav bar with logo image, CSS-only mobile hamburger
+│   └── footer.html                # Logo, contact email, copyright, privacy link
 ├── _layouts/
-│   └── default.html               # Single HTML5 layout shell (head, seo, header, main, footer)
+│   └── default.html               # Single HTML5 layout shell (head, seo, fonts, favicon, header, main, footer)
 ├── assets/
-│   └── css/
-│       └── style.css              # All styling (~370 lines, CSS custom properties, responsive)
+│   ├── css/
+│   │   └── style.css              # All styling (~500 lines, CSS custom properties, responsive)
+│   └── images/
+│       └── logo.png               # Robo Skyline logo (used in header, hero, footer, favicon)
 ├── _config.yml                    # Jekyll config (url, baseurl, plugins)
 ├── Gemfile                        # Jekyll ~> 4.3, jekyll-seo-tag
 ├── Gemfile.lock                   # Locked dependency versions
 ├── CNAME                          # Custom domain: roboskyline.ca
-├── index.html                     # Homepage (hero, services cards, contact CTA)
+├── index.html                     # Homepage (hero with logo, services cards, contact CTA)
 ├── privacy-policy.md              # Privacy policy content page
 ├── .gitignore                     # Ignores _site/, .jekyll-cache, vendor/, etc.
 └── README.md
@@ -71,6 +73,8 @@ Each page follows this rendering path:
 4. The layout includes `_includes/header.html` and `_includes/footer.html`.
 5. `jekyll-seo-tag` generates `<meta>`, Open Graph, and JSON-LD tags in `<head>`.
 6. `assets/css/style.css` is linked in the `<head>` and copied as-is to `_site/`.
+7. Google Fonts (Rajdhani, Inter) are loaded via `<link>` tags in `<head>`.
+8. A favicon (`assets/images/logo.png`) is referenced in `<head>`.
 
 ## Key Implementation Caveats
 
@@ -108,20 +112,22 @@ No manual CI/CD setup is needed beyond the workflow file already in the repo.
 
 ## Design Tokens (CSS Custom Properties)
 
-All themeable values are defined as CSS custom properties on `:root` in `assets/css/style.css`. Modify these to change the site's visual design:
+All themeable values are defined as CSS custom properties on `:root` in `assets/css/style.css`. The palette is derived from the Robo Skyline logo (retro-futuristic, mid-century industrial aesthetic with red accents, light blue backgrounds, and warm cream tones).
 
 | Token | Value | Purpose |
 |---|---|---|
-| `--color-bg` | `#ffffff` | Page background |
-| `--color-bg-alt` | `#f7f8fa` | Alternate section background (hero, cards, contact) |
-| `--color-text` | `#1a1a2e` | Primary text color |
-| `--color-text-muted` | `#5a5a7a` | Secondary/body text |
-| `--color-primary` | `#2563eb` | Accent color (links, buttons) |
-| `--color-primary-hover` | `#1d4ed8` | Accent hover state |
-| `--color-dark` | `#0f1b2d` | Header and footer background |
-| `--color-dark-text` | `#e2e8f0` | Text on dark backgrounds |
-| `--color-border` | `#e2e5eb` | Border/divider color |
-| `--font-sans` | System font stack | `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, ...` |
+| `--color-bg` | `#f0f4f8` | Page background (soft light blue, matching logo background) |
+| `--color-bg-alt` | `#e8ddd0` | Alternate section background (warm cream, from logo tones) |
+| `--color-text` | `#1a1a2e` | Primary text color (dark navy) |
+| `--color-text-muted` | `#4a4a5a` | Secondary/body text |
+| `--color-primary` | `#c0392b` | Accent color -- red (links, buttons, card borders, dividers) |
+| `--color-primary-hover` | `#a93226` | Accent hover state (darker red) |
+| `--color-dark` | `#0d0d12` | Header and footer background (near-black) |
+| `--color-dark-text` | `#e2e0dc` | Text on dark backgrounds (warm off-white) |
+| `--color-border` | `#d0c8be` | Border/divider color (warm tone) |
+| `--color-accent-light` | `#b8cfe0` | Soft blue highlight color |
+| `--font-heading` | `"Rajdhani", ...` | Heading font (geometric/industrial, loaded via Google Fonts) |
+| `--font-body` | `"Inter", ...` | Body font (clean sans-serif, loaded via Google Fonts, with system fallbacks) |
 | `--max-width` | `960px` | Content container max width |
 | `--space-xs` | `0.5rem` | Extra-small spacing |
 | `--space-sm` | `1rem` | Small spacing |
@@ -134,12 +140,15 @@ All themeable values are defined as CSS custom properties on `:root` in `assets/
 Key classes used across pages (defined in `assets/css/style.css`):
 
 - `.container` -- max-width wrapper with horizontal padding
-- `.site-header` / `.header-inner` -- sticky top navigation bar
-- `.wordmark` -- company name link in the header
-- `.site-nav` -- horizontal nav link list (collapses on mobile)
+- `.site-header` / `.header-inner` -- sticky top navigation bar with red bottom border
+- `.wordmark` -- logo image + company name link in the header (flex layout)
+- `.logo-img` -- logo image in the header (44px height)
+- `.site-nav` -- horizontal nav link list with red underline hover effect (collapses on mobile)
 - `.nav-toggle` / `.nav-toggle-label` -- CSS-only hamburger menu
-- `.hero` -- full-width hero section with centered text
-- `.services` / `.services-grid` / `.service-card` -- services section with CSS Grid cards
-- `.contact` / `.btn` -- contact CTA section with styled button
-- `.site-footer` / `.footer-inner` -- dark footer with flex layout
-- `.page-content` -- wrapper for non-homepage content (privacy policy)
+- `.hero` -- full-width hero section with centered logo and text, red accent bar via `::after`
+- `.hero-logo` -- large centered logo in hero section (220px width)
+- `.services` / `.services-grid` / `.service-card` -- services section with CSS Grid cards; cards have 4px red left border and hover lift effect
+- `.contact` / `.btn` -- contact CTA section with red styled button (uppercase, Rajdhani font)
+- `.site-footer` / `.footer-inner` -- dark footer with red top border and flex layout
+- `.footer-brand` / `.footer-logo` -- logo + copyright grouping in footer (36px logo)
+- `.page-content` -- wrapper for non-homepage content (privacy policy); h2 elements use red bottom border

@@ -1,15 +1,17 @@
 /* ── Custom Properties ─────────────────────────────────────── */
 :root {
-  --color-bg: #ffffff;
-  --color-bg-alt: #f7f8fa;
+  --color-bg: #f0f4f8;
+  --color-bg-alt: #e8ddd0;
   --color-text: #1a1a2e;
-  --color-text-muted: #5a5a7a;
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-dark: #0f1b2d;
-  --color-dark-text: #e2e8f0;
-  --color-border: #e2e5eb;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  --color-text-muted: #4a4a5a;
+  --color-primary: #c0392b;
+  --color-primary-hover: #a93226;
+  --color-dark: #0d0d12;
+  --color-dark-text: #e2e0dc;
+  --color-border: #d0c8be;
+  --color-accent-light: #b8cfe0;
+  --font-heading: "Rajdhani", "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   --max-width: 960px;
   --space-xs: 0.5rem;
@@ -33,7 +35,7 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   color: var(--color-text);
   background: var(--color-bg);
   line-height: 1.7;
@@ -55,6 +57,12 @@ a:hover {
   color: var(--color-primary-hover);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
 /* ── Container ────────────────────────────────────────────── */
 .container {
   max-width: var(--max-width);
@@ -68,25 +76,37 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 3px solid var(--color-primary);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 72px;
 }
 
 .wordmark {
-  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
   font-weight: 700;
   color: #ffffff;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .wordmark:hover {
   color: #ffffff;
-  opacity: 0.85;
+  opacity: 0.9;
+}
+
+.logo-img {
+  height: 44px;
+  width: auto;
+  border-radius: 4px;
 }
 
 .site-nav {
@@ -96,17 +116,35 @@ a:hover {
 
 .site-nav a {
   color: var(--color-dark-text);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: opacity 0.2s ease;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 0.25s ease;
 }
 
 .site-nav a:hover {
   color: #ffffff;
-  opacity: 1;
 }
 
-/* Mobile nav toggle — hidden by default */
+.site-nav a:hover::after {
+  width: 100%;
+}
+
+/* Mobile nav toggle */
 .nav-toggle {
   display: none;
 }
@@ -151,13 +189,17 @@ a:hover {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 64px;
+    top: 72px;
     left: 0;
     right: 0;
     background: var(--color-dark);
     padding: var(--space-sm) var(--space-md) var(--space-md);
     gap: var(--space-sm);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .site-nav a::after {
+    display: none;
   }
 
   .nav-toggle:checked ~ .site-nav {
@@ -183,16 +225,36 @@ a:hover {
 .hero {
   padding: var(--space-xl) 0;
   text-align: center;
-  background: var(--color-bg-alt);
+  background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--color-primary);
+  margin: var(--space-md) auto 0;
+}
+
+.hero-logo {
+  width: 220px;
+  height: auto;
+  margin: 0 auto var(--space-md);
+  border-radius: 8px;
 }
 
 .hero h1 {
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 800;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 1.15;
   color: var(--color-text);
   margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .hero p {
@@ -205,14 +267,27 @@ a:hover {
 /* ── Services ─────────────────────────────────────────────── */
 .services {
   padding: var(--space-xl) 0;
+  background: #ffffff;
 }
 
 .services h2 {
   text-align: center;
-  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xs);
   color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.services h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--color-primary);
+  margin: var(--space-xs) auto var(--space-lg);
 }
 
 .services-grid {
@@ -224,15 +299,25 @@ a:hover {
 .service-card {
   background: var(--color-bg-alt);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-left: 4px solid var(--color-primary);
+  border-radius: 6px;
   padding: var(--space-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(13, 13, 18, 0.1);
 }
 
 .service-card h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
   margin-bottom: var(--space-xs);
   color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .service-card p {
@@ -250,9 +335,21 @@ a:hover {
 }
 
 .contact h2 {
-  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--color-primary);
+  margin: var(--space-xs) auto var(--space-sm);
 }
 
 .contact p {
@@ -262,18 +359,22 @@ a:hover {
 
 .contact .btn {
   display: inline-block;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 2.25rem;
   background: var(--color-primary);
   color: #ffffff;
-  font-weight: 600;
-  border-radius: 6px;
+  font-family: var(--font-heading);
+  font-weight: 700;
   font-size: 1rem;
-  transition: background 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 4px;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .contact .btn:hover {
   background: var(--color-primary-hover);
   color: #ffffff;
+  transform: translateY(-1px);
 }
 
 /* ── Footer ───────────────────────────────────────────────── */
@@ -282,6 +383,7 @@ a:hover {
   color: var(--color-dark-text);
   padding: var(--space-md) 0;
   font-size: 0.85rem;
+  border-top: 3px solid var(--color-primary);
 }
 
 .footer-inner {
@@ -292,8 +394,21 @@ a:hover {
   gap: var(--space-sm);
 }
 
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-logo {
+  height: 36px;
+  width: auto;
+  border-radius: 3px;
+}
+
 .footer-contact a {
   color: var(--color-dark-text);
+  transition: color 0.2s ease;
 }
 
 .footer-contact a:hover {
@@ -302,6 +417,7 @@ a:hover {
 
 .footer-links a {
   color: var(--color-dark-text);
+  transition: color 0.2s ease;
 }
 
 .footer-links a:hover {
@@ -309,13 +425,17 @@ a:hover {
 }
 
 .footer-copy {
-  color: rgba(226, 232, 240, 0.6);
+  color: rgba(226, 224, 220, 0.6);
 }
 
 @media (max-width: 640px) {
   .footer-inner {
     flex-direction: column;
     text-align: center;
+  }
+
+  .footer-brand {
+    flex-direction: column;
   }
 }
 
@@ -325,9 +445,12 @@ a:hover {
 }
 
 .page-content h1 {
+  font-family: var(--font-heading);
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .page-content .subtitle {
@@ -337,12 +460,15 @@ a:hover {
 }
 
 .page-content h2 {
+  font-family: var(--font-heading);
   font-size: 1.3rem;
   font-weight: 700;
   margin-top: var(--space-md);
   margin-bottom: var(--space-sm);
   padding-bottom: var(--space-xs);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 2px solid var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .page-content p,
