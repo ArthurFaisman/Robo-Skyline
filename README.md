@@ -39,7 +39,7 @@ bundle install
 bundle exec jekyll serve
 ```
 
-The site will be available at `http://127.0.0.1:4000/`. Pass `--baseurl ""` when serving locally to strip the `/Robo-Skyline` path prefix.
+The site will be available at `http://127.0.0.1:4000/`.
 
 ## Deployment
 
@@ -50,6 +50,6 @@ The site deploys automatically via the GitHub Actions workflow at `.github/workf
 Once deployed, the site is available at:
 
 ```
-https://arthurfaisman.github.io/Robo-Skyline/
+https://roboskyline.ca/
 ```
 
